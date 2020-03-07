@@ -1,19 +1,18 @@
 from flask import Flask, request, abort
+import os
 
 import gcapi
 
 from linebot import (
-    LineBotApi, WebhookHandler
+   LineBotApi, WebhookHandler
 )
 from linebot.exceptions import (
-    InvalidSignatureError
+   InvalidSignatureError
 )
 from linebot.models import (
-    FollowEvent, MessageEvent, TextMessage, TextSendMessage, ImageMessage, ImageSendMessage, TemplateSendMessage,
-    ButtonsTemplate, PostbackTemplateAction, MessageTemplateAction, URITemplateAction, QuickReplyButton, QuickReply,
-    PostbackAction, DatetimePickerAction, PostbackEvent
+   MessageEvent, PostbackEvent, TextMessage, TextSendMessage,
+   QuickReplyButton, QuickReply, PostbackAction, DatetimePickerAction
 )
-import os
 
 app = Flask(__name__)
 
