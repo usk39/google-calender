@@ -38,7 +38,7 @@ def read(date):
    dateMax = date + 'T23:59:00+09:00'
    date += 'T00:00:00+09:00'
 
-   events_result = service.events().list(calendarId='primary', timeMin=date, timeMax=dateMax,
+   events_result = service.events().list(calendarId='pigred3923@gmail.com', timeMin=date, timeMax=dateMax,
                                        maxResults=10, singleEvents=True, orderBy='startTime').execute()
    events = events_result.get('items', [])
 
