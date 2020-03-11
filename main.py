@@ -17,11 +17,11 @@ from linebot.models import (
 app = Flask(__name__)
 
 # 環境変数取得
-YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
-YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+LINE_CHANNEL_ACCESS_TOKEN = os.environ["LINE_CHANNEL_ACCESS_TOKEN"]
+LINE_CHANNEL_SECRET = os.environ["LINE_CHANNEL_SECRET"]
 
-line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
-handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
+handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
 @app.route("/")
 def hello_world():
@@ -67,7 +67,8 @@ def handle_postback(event):
        date = event.postback.params['date']
        msg = quickstart.read(date)
        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
-   else event.postback.data == "write":
+   else:
+       event.postback.data == "write"
        text_write = "以下の形式で追加したい予定を入力してください。"\
                     "入力形式が正しくない場合、最初のクイックリプライに戻ります。追加に成功した場合はURLが表示されます。"\
                     "\n予定名\n場所(任意)\n年月日(半角数字8桁)\n開始時間(半角数字4桁)\n終了時間(半角数字4桁)"
