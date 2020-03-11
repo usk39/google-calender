@@ -83,3 +83,6 @@ def write(title, location, start, end):
    event = service.events().insert(calendarId='73t3ahvdjq4vh3dujgosa13868@group.calendar.google.com', body=event).execute()
    msg = event.get('htmlLink')
    return msg
+
+msg = write('sample', '日本', '20201016 1200', '20201016 1300')
+print (msg)
