@@ -1,7 +1,7 @@
 from flask import Flask, request, abort
 import os
 
-import quickstart  # gcapi.py
+import quickstart
 
 from linebot import (
    LineBotApi, WebhookHandler
