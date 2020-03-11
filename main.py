@@ -2,8 +2,6 @@ from flask import Flask, request, abort
 import os
 
 import quickstart
-import get_event
-import insert_event
 
 from linebot import (
    LineBotApi, WebhookHandler
@@ -44,11 +42,10 @@ def callback():
 
     return 'OK'
 
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
    push_text = event.message.text
-   text = gcapi.extract_words(push_text)
+   text = quickstart.extract_words(push_text)
    if text is None:
        text_message = TextSendMessage(text="Googleカレンダーの予定を知りたいですか？それとも追加したいですか？",
                                       quick_reply=QuickReply(items=[
@@ -59,14 +56,14 @@ def handle_message(event):
                                       ]))
        line_bot_api.reply_message(event.reply_token, text_message)
    else:
-       htmllink = gcapi.write(*text)
+       htmllink = quickstart.write(*text)
        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=htmllink))
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
    if event.postback.data == "read":
        date = event.postback.params['date']
-       msg = gcapi.read(date)
+       msg = quickstart.read(date)
        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=msg))
    else event.postback.data == "write":
        text_write = "以下の形式で追加したい予定を入力してください。"\
